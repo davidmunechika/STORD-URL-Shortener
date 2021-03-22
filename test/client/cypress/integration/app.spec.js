@@ -40,9 +40,6 @@ context('App', () => {
       cy.get('button').click();
       cy.get('[id=successDialog]').should('have.length', 1);
       cy.get('[id=shortURL]').should('have.length', 1);
-      // let shortURL = cy.get('[id=shortURL]');
-      // console.log(shortURL);
-      // cy.visit(`${shortURL}`);
     });
 
     it('Modal should disappear when user clicks outside box', () => {
@@ -51,16 +48,15 @@ context('App', () => {
       cy.get('[id=successDialog]').should('have.length', 0);
     });
 
-    // it('Short URL should copy to clipboard when copy button is clicked', () => {
-    //   cy.get('input').type(
-    //     'https://www.stord.com/services-data-science-and-design'
-    //   );
-    //   cy.get('button').click();
-    //   cy.get('[id=successDialog]').should('have.length', 1);
-    //   let shortURL = cy.get('[id=shortURL]');
-    //   console.log(shortURL);
-    //   cy.get('[id=copyIcon]').click();
-    //   cy.visit(`${shortURL}`);
-    // });
+    it('Short URL should generate correctly for given original URL', () => {
+      cy.get('input').clear();
+      cy.get('input').type(
+        'https://www.stord.com/services-data-science-and-design'
+      );
+      cy.get('button').click();
+      cy.get('[id=successDialog]').should('have.length', 1);
+      cy.get('[id=shortURL]').should('have.length', 1);
+      cy.contains('http://localhost:3000/W-QAgLdXx');
+    });
   });
 });

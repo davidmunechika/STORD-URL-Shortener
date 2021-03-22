@@ -2,8 +2,7 @@
 require('dotenv').config();
 //Libraries
 const mongoose = require('mongoose');
-console.log(process.env.MONGODB_TEST_URI);
-console.log(process.env.NODE_ENV);
+
 //Connect to MongoDB database
 const connectDB = async () => {
   try {
