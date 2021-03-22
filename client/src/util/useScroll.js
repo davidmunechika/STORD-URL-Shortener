@@ -1,0 +1,15 @@
+//Libraries
+import { useInView } from 'react-intersection-observer';
+import { useAnimation } from 'framer-motion';
+
+//Util function for fading in elements when scrolling down page
+export const useScroll = () => {
+  const controls = useAnimation();
+  const [element, view] = useInView({ threshold: 0.3 });
+  if (view) {
+    controls.start('show');
+  } else {
+    controls.start('hidden');
+  }
+  return [element, controls];
+};
