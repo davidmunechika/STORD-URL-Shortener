@@ -10,7 +10,9 @@ const cors = require('cors');
 const connectDB = require('./db/mongoose');
 
 //Connect to MongoDB
-connectDB();
+if (process.env.NODE_ENV !== 'test') {
+  connectDB();
+}
 
 //Setup server
 const app = express();
@@ -21,6 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(indexRouter);
 
-app.listen(port, () => {
+module.exports = app.listen(port, () => {
   console.log('Server is up on port ' + port);
 });

@@ -8,7 +8,7 @@ import teamwork from '../assets/teamwork.svg';
 //Images
 import demo from '../assets/demo.gif';
 //Styles
-import { Main, Description, Image } from '../style/styles';
+import { Main, Description } from '../style/styles';
 import styled from 'styled-components';
 //Animations
 import { scrollReveal } from '../style/animation';
