@@ -12,13 +12,18 @@ const Modal = (props) => {
     props.setCopied(true);
   };
   return (
-    <Dialog open={props.open} onClose={props.onClose}>
+    <Dialog id="successDialog" open={props.open} onClose={props.onClose}>
       <ModalContent>
         <h1>Thank you for using STORD URL Shortener!</h1>
         <DialogContent dividers={true}>
           <p>Here's your shortened URL:</p>
-          <h2>{props.shortURL}</h2>
-          <img src={copy} alt="copy icon" onClick={() => handleCopy()} />
+          <h2 id="shortURL">{props.shortURL}</h2>
+          <img
+            id="copyIcon"
+            src={copy}
+            alt="copy icon"
+            onClick={() => handleCopy()}
+          />
           {!props.copied ? (
             <p id="placeholderText">Copy the link above</p>
           ) : (

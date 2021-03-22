@@ -2,20 +2,22 @@ process.env.NODE_ENV = 'test';
 //Testing Libraries
 const expect = require('chai').expect;
 const request = require('supertest');
-const chai = require('chai');
-const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 //Imports
 const server = require('../../server.js');
 const connectDB = require('../../db/test.js');
 
-chai.use(chaiHttp);
-
 describe('URL', () => {
   let body;
+  /*
+   * Connect to MongoDB
+   */
   beforeEach(async () => {
     await connectDB();
   });
+  /*
+   * Create sample data in test database
+   */
   beforeEach((done) => {
     request(server)
       .post('/')
@@ -27,6 +29,9 @@ describe('URL', () => {
         done();
       });
   });
+  /*
+   * Test the GET /:slug route
+   */
   describe('GET /:slug', () => {
     it('Getting an invalid short URL should not work', (done) => {
       request(server)
@@ -54,8 +59,7 @@ describe('URL', () => {
       let url = {
         fullURL: '',
       };
-      chai
-        .request(server)
+      request(server)
         .post('/')
         .send(url)
         .end((err, res) => {
@@ -68,8 +72,7 @@ describe('URL', () => {
     let url = {
       fullURL: '//test.com',
     };
-    chai
-      .request(server)
+    request(server)
       .post('/')
       .send(url)
       .end((err, res) => {
@@ -81,8 +84,7 @@ describe('URL', () => {
     let url = {
       fullURL: 'https://www.linkedin.com/company/stord/posts/?feedView=images',
     };
-    chai
-      .request(server)
+    request(server)
       .post('/')
       .send(url)
       .end((err, res) => {
@@ -97,8 +99,7 @@ describe('URL', () => {
     let url = {
       fullURL: 'https://www.stord.com/services-data-science-and-design',
     };
-    chai
-      .request(server)
+    request(server)
       .post('/')
       .send(url)
       .end((err, res) => {
@@ -108,6 +109,9 @@ describe('URL', () => {
         done();
       });
   });
+  /*
+   * Drop testing database
+   */
   after(function (done) {
     console.log('Deleting test database');
     mongoose.connection.db.dropDatabase(done);

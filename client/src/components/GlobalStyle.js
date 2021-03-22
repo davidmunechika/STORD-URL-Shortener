@@ -56,7 +56,7 @@ span{
 }
 p{
     padding: 3rem 0rem;
-    color: #aaaaaa;
+    color: #808080;
     font-size: 1.4rem;
     line-height: 150%
 }
