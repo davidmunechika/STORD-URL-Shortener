@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'test';
+require('dotenv').config({ path: './test.env' });
 //Testing Libraries
 const expect = require('chai').expect;
 const request = require('supertest');
@@ -13,6 +13,8 @@ describe('URL', () => {
    * Connect to MongoDB
    */
   beforeEach(async () => {
+    // process.env.MONGODB_TEST_URI =
+    //   'mongodb+srv://davidmunechika:jEWzE3ZJiVyDu1Je@cluster0.uxvp7.mongodb.net/urlTestDatabase?retryWrites=true&w=majority';
     await connectDB();
   });
   /*
