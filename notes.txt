@@ -1,0 +1,10 @@
+Run the following commands to setup, run, or test the application.
+
+SETUP:
+npm run setup
+
+RUN:
+npm run start
+
+TEST:
+npm run test
