@@ -36,13 +36,12 @@ router.post('/', async (req, res) => {
         return res.status(201).json(url);
       }
     } else {
-      res
+      return res
         .status(400)
-        .json('Invalid URL. Please enter a valid url for shortening.');
+        .json('Invalid URL entered. Only valid URLs can be shortened.');
     }
   } catch (err) {
-    console.error(err.message);
-    return res.status(500).json('Internal Server error ' + err.message);
+    return res.status(500).json('Internal server error');
   }
 });
 
@@ -56,13 +55,10 @@ router.get('/:slug', async (req, res) => {
     if (url) {
       return res.status(200).json(url.fullURL);
     } else {
-      return res
-        .status(400)
-        .json("The short url doesn't exists in our system.");
+      return res.status(400).json('No URL exists for the given short URL');
     }
   } catch (err) {
-    console.error('Error while retrieving long url for slug ' + slug);
-    return res.status(500).json('There is some internal error.');
+    return res.status(500).json('Internal server error');
   }
 });
 
