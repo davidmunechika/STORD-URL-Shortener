@@ -3,7 +3,7 @@ require('dotenv').config({ path: './test.env' });
 //Libraries
 const mongoose = require('mongoose');
 
-//Connect to MongoDB database
+//Connect to MongoDB testing database
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_TEST_URI, {
@@ -11,7 +11,7 @@ const connectDB = async () => {
       useUnifiedTopology: true,
       useCreateIndex: true,
     });
-    console.log('Successful connection to MongoDB');
+    console.log('Successful connection to MongoDB (Test database)');
   } catch (err) {
     console.error(err.message);
   }
