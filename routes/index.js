@@ -18,9 +18,7 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   try {
     const fullURL = req.body.fullURL;
-
     const slug = shortid.generate();
-
     if (validUrl.isUri(fullURL)) {
       let url = await URL.findOne({ fullURL: fullURL });
       if (url) {
