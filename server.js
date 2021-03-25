@@ -18,14 +18,18 @@ if (process.env.NODE_ENV !== 'test') {
 const app = express();
 const port = process.env.PORT || 5000;
 
+//Allow requests from frontend
 app.use(
   cors({
     origin: 'http://localhost:3000',
   })
 );
+//Allow json to be sent in request body
 app.use(express.json());
+//Use index api routes
 app.use(indexRouter);
 
+//Start up server
 module.exports = app.listen(port, () => {
   console.log('Server is up on port ' + port);
 });

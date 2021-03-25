@@ -13,17 +13,17 @@ const URL = require('../models/url');
 const router = express.Router();
 
 // @route POST /
-// @desc Create new shortened URL
+// @desc Create new shortened URL. If the URL is not valid, return an error. If the URL already exists, return the already created short URL. Otherwise, generate a new short URL.
 // @access Public
 router.post('/', async (req, res) => {
   try {
     const fullURL = req.body.fullURL;
-    const slug = shortid.generate();
     if (validUrl.isUri(fullURL)) {
       let url = await URL.findOne({ fullURL: fullURL });
       if (url) {
         return res.status(200).json(url);
       } else {
+        const slug = shortid.generate();
         const shortURL = process.env.BASE_URL + '/' + slug;
         url = new URL({
           fullURL,
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
 });
 
 // @route GET /:slug
-// @desc Access original URL
+// @desc Access original URL. If the URL does not exist, return an error. If the URL does match one created, return the original, full URL.
 // @access Public
 router.get('/:slug', async (req, res) => {
   try {
