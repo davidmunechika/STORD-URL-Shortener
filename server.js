@@ -21,7 +21,7 @@ const port = process.env.PORT || 5000;
 //Allow requests from frontend
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.BASE_URL,
   })
 );
 //Allow json to be sent in request body
